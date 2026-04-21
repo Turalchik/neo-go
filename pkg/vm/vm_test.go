@@ -53,6 +53,16 @@ func TestInteropHook(t *testing.T) {
 	assert.Equal(t, big.NewInt(1), v.estack.Pop().value.Value())
 }
 
+func TestSome(t *testing.T) {
+	v := newTestVM()
+	prog := []byte{
+		byte(opcode.PUSHINT16), 0, 0, byte(opcode.TRY), 4, 0, byte(opcode.THROW),
+		byte(opcode.ENDTRY), 1, byte(opcode.JMP), 0xfa,
+	}
+	v.Load(prog)
+	runVM(t, v)
+}
+
 func TestVM_SetPriceGetter(t *testing.T) {
 	v := newTestVM()
 	prog := []byte{
