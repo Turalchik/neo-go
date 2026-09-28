@@ -13,6 +13,7 @@ import (
 	"os"
 	"slices"
 	"text/tabwriter"
+	"time"
 	"unicode/utf8"
 
 	"github.com/holiman/uint256"
@@ -639,6 +640,11 @@ func (v *VM) Run() error {
 	// vmstate.Halt (the default) or vmstate.Break are safe to continue.
 	v.state = vmstate.None
 	ctx = v.Context()
+	start := time.Now()
+	defer func() {
+		dur := time.Since(start)
+		fmt.Println(dur.Seconds())
+	}()
 	for {
 		switch {
 		case v.state.HasFlag(vmstate.Fault):
