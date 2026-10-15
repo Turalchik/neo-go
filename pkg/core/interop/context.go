@@ -547,7 +547,7 @@ func (ic *Context) initVM(v *vm.VM) {
 	v.LoadToken = ic.LoadToken
 	v.SetGasLimit(-1)
 	v.SyscallHandler = ic.SyscallHandler
-	if ic.IsHardforkEnabled(config.HFHuyao) {
+	if true {
 		v.SetPriceGetter(ic.GetPriceV1)
 		v.SetOpcodeExecutor(v.OpcodeExecutorV1)
 	} else {
